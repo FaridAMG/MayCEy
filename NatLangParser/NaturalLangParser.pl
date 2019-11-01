@@ -29,12 +29,18 @@ sintagma_verbal(S0,S):- verbo(S0,S1), sintagma_nominal(S1,S).
 
 
 
+
 %-------------------------------------------------------------------
 %CONVERTS NORMAL INPUT TEXT TO APPROPRIATE LIST FOR oracion(S0,S)...
 %-------------------------------------------------------------------
-text_to_list(T,W) :- string_chars(T, X),    % Text_to_list("enter like this", B). B = [enter, like, this]
-                    chars_words(X, W).
-                                            % Basically destroys a String into alpha elements (simple chars)
+text_to_list(T,R) :- atom_string(T, S),  % Text_to_list('enter like this', B). B = [enter, like, this]
+                     string_chars(S, C),    
+                    chars_words(C, W),     % Basically destroys a String into alpha elements (simple chars)
+                    oracion(W,R), 
+                    length_1(X,R), L is X, X > 0. %this checks if R is not empty (which, if it is, oracion is 
+                                                                 % not seeing good structure of sentence ) 
+                            
+                                           
                          
 
 chars_words([], []).
@@ -80,6 +86,9 @@ partition_sorted(Goal, List, True, False) :-
             ).
 
 
+
+length_1(0,[]).
+length_1(L+1, [H|T]) :- length_1(L,T).
 
 
 
