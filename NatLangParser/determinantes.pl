@@ -107,14 +107,51 @@ determinante([todos|S],S).
 determinante([todas|S],S).
 determinante([demasiados|S],S).
 determinante([demasiadas|S],S).
-
 %LOS INTERROGATIVOS/EXCLAMATIVOS
 determinante([que|S],S).
 determinante([cuanto|S],S).
 determinante([cuantos|S],S).
 determinante([cual|S],S).
 determinante([cuales|S],S).
+determinante([porque|S],S).
+determinante([puedo|S],S).
+determinante([permiso|S],S).
+%LOS DE FIN DE CONVERSACION
+determinante([gracias|S],S).
+determinante([adios|S],S).
+%LOS DE INICIO DE CONVERSACION
+determinante([buenas|S],S).
+determinante([buenos|S],S).
+determinante([hola|S],S).
+%LOS DE EMERGENCIAS
+determinante([mayday|S],S).
+determinante([7500|S],S).
 
+
+
+%inicio_conv 
+inicio(buenas).
+inicio(buenos).
+inicio(hola).
+
+
+%fin_conv 
+fin(gracias).
+fin(adios).
+
+%pregunta_conv 
+pregunta(que).
+pregunta(cuanto).
+pregunta(cuantos).
+pregunta(cual).
+pregunta(cuales).
+pregunta(porque).
+pregunta(puedo).
+pregunta(permiso).
+
+%emergencia_conv 
+emergencia(mayday).
+emergencia(7500).
 
 
 
@@ -124,18 +161,30 @@ determinante([cuales|S],S).
 
 
 % INICIO DE CONVERSACION
-
+conv_starters(E,S) :-   % E es la entrada y S es la salida....
+            inicio(X),
+            member(X,E) -> S = 'Hola, en que te puedo ayudar', ! .
 
 
 %FIN DE CONVERSACION
-
+conv_enders(E,S) :- 
+            fin(X),
+            member(X,E) -> S = 'Cambio y fuera!', ! . 
 
 
 %PREGUNTAS
+conv_questions(E,S) :- 
+            pregunta(X),
+            member(X,E) -> S = 'this is a question', ! .
 
 
 
 %EMERGENCIAS
+conv_emergencys(E,S) :- 
+            emergencia(X),
+            member(X,E) -> S = 'this is an emergency', ! .
+
+
 
 
 

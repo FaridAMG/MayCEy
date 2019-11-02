@@ -11,7 +11,6 @@
 :- include('nombres.pl').
 
 
-
 %-------------------------------------------------------------------
 %DECLARATION OF THE ORIGINAL SINTAGMA
 %-------------------------------------------------------------------
@@ -33,12 +32,12 @@ sintagma_verbal(S0,S):- verbo(S0,S1), sintagma_nominal(S1,S).
 %-------------------------------------------------------------------
 %CONVERTS NORMAL INPUT TEXT TO APPROPRIATE LIST FOR oracion(S0,S)...
 %-------------------------------------------------------------------
-text_to_list(T,R) :- atom_string(T, S),  % Text_to_list('enter like this', B). B = [enter, like, this]
+text_to_list(T,F) :- atom_string(T, S),           % Text_to_list('enter like this', B). B = [enter, like, this]
                      string_chars(S, C),    
-                    chars_words(C, W),     % Basically destroys a String into alpha elements (simple chars)
-                    oracion(W,R), 
-                    length_1(X,R), L is X, X > 0. %this checks if R is not empty (which, if it is, oracion is 
-                                                                 % not seeing good structure of sentence ) 
+                    chars_words(C, W),            % Basically destroys a String into alpha elements (simple chars)
+                    oracion(W,R),                 % W is the text converted to list.
+                    %length_1(X,R), L is X, X > 0, %this checks if R is not empty (which, if it is, oracion is 
+                    identifing_key_words(W,F).                              % not seeing good structure of sentence ) 
                             
                                            
                          
@@ -92,6 +91,31 @@ length_1(L+1, [H|T]) :- length_1(L,T).
 
 
 
+
+%__________________________________________________________________
+%-------------------------------------------------------------------
+%MECANISMOS DE RAZONAMINETO (mecanismo hacia atras)................
+%-------------------------------------------------------------------
+%___________________________________________________________________
+
+     %%%     %%%
+     %%%     %%%
+     %%%     %%%
+%         %        %
+ %%              %%
+   %%%        %%%
+     %%%%%%%%%%
+       %%%%%%
+
+
+
+% IDENTIFING KEYS WORDS.....
+identifing_key_words(E,S):-
+                conv_emergencys(E,S);
+                conv_questions(E,S);
+                conv_starters(E,S);
+                conv_enders(E,S);
+                S = 'Perdon, no entendi. Repita...'.
 
 
 
