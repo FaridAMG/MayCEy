@@ -1,4 +1,6 @@
 % DETERMINANTES WILL BE STORED HERE
+:- include('verbos.pl').
+
 
 %LOS ARTICULOS (DETERMINADOS)
 determinante([el|S],S).
@@ -12,6 +14,7 @@ determinante([un|S],S).%singular
 determinante([una|S],S).
 determinante([unos|S],S).%plural
 determinante([unas|S],S).
+
 
 %LOS DEMOSTRATIVOS ()
 determinante([este|S],S).
@@ -163,26 +166,26 @@ emergencia(7500).
 % INICIO DE CONVERSACION
 conv_starters(E,S) :-   % E es la entrada y S es la salida....
             inicio(X),
-            member(X,E) -> S = 'Hola, en que te puedo ayudar', ! .
+            member(X,E) -> S = 'Hola, en que te puedo ayudar'.
 
 
 %FIN DE CONVERSACION
 conv_enders(E,S) :- 
             fin(X),
-            member(X,E) -> S = 'Cambio y fuera!', ! . 
+            member(X,E) -> S = 'Cambio y fuera!'. 
 
 
 %PREGUNTAS
 conv_questions(E,S) :- 
             pregunta(X),
-            member(X,E) -> S = 'this is a question', ! .
+            member(X,E) -> verificar_compatibilidad_de_preg(E,S).
 
 
 
 %EMERGENCIAS
 conv_emergencys(E,S) :- 
             emergencia(X),
-            member(X,E) -> S = 'this is an emergency', ! .
+            member(X,E) -> S = 'this is an emergency'.
 
 
 

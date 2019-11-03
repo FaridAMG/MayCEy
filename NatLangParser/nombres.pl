@@ -71,3 +71,8 @@ emergen(secuestro,'','').
 
 
 
+verificar_compatibilidad_de_involucrados(X,E,S):-   %Pregunta
+                                            X = X,
+                                            aeronave(Y,_,_),
+                                            member(Y, E) -> S = 'el avion llego'; S = 'el avion no llego'.
+                                            
