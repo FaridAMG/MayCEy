@@ -1,4 +1,6 @@
 % NAMES WILL BE STORED HERE
+:- include('communication.pl').
+
 
 nombre([hombre|S],S).
 nombre([manzana|S],S).
@@ -45,15 +47,15 @@ nombre([p1|S],S).
 
 
 %NOMBRE DE AERONAVES (modelo, tamano, matricula)
-aeronave(cessna,peq,'delta hotel').
-aeronave(beechcraft,peq,'charlie bravo').
-aeronave(phenom,peq,'india kilo').
-aeronave(717,med,'lima mike').
-aeronave(190,med,'romeo sierra').
-aeronave(a220,med,'tango victor').
-aeronave(747,gran,'yankee zulu').
-aeronave(a340,gran,'echo foxtrot').
-aeronave(a380,gran,'oscar quebec').
+aeronave(cessna,peq,delta).
+aeronave(beechcraft,peq,charlie).
+aeronave(phenom,peq,india).
+aeronave(717,med,lima).
+aeronave(190,med,romeo).
+aeronave(a220,med,tango).
+aeronave(747,gran,yankee).
+aeronave(a340,gran,echo).
+aeronave(a380,gran,oscar).
 
 %NOMBRE DE PISTAS(nombre, km, direccion, velocidad max p'aterrizar)
 pista(p1,1,'',200).
@@ -73,6 +75,16 @@ emergen(secuestro,'','').
 
 verificar_compatibilidad_de_involucrados(X,E,S):-   %Pregunta
                                             X = X,
-                                            aeronave(Y,_,_),
-                                            member(Y, E) -> S = 'el avion llego'; S = 'el avion no llego'.
+                                            repeat,
+                                            aeronave(M,_,_),
+                                            ( member(M,E) -> S = 'Puede aterrizar'; 
+                                            tower_control_comm('cual es su modelo',R),
+                                             verificar_compatibilidad_de_involucrados(X,R,S) ).
+                                                
                                             
+
+                                             
+
+
+
+                                    

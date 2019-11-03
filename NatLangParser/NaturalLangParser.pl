@@ -35,11 +35,17 @@ sintagma_verbal(S0,S):- verbo(S0,S1), sintagma_nominal(S1,S).
 text_to_list(T,F) :- atom_string(T, S),           % Text_to_list('enter like this', B). B = [enter, like, this]
                      string_chars(S, C),    
                     chars_words(C, W),            % Basically destroys a String into alpha elements (simple chars)
-                    oracion(W,R),                 % W is the text converted to list.
+                    %oracion(W,R),                 % W is the text converted to list.
                     %length_1(X,R), L is X, X > 0, %this checks if R is not empty (which, if it is, oracion is 
                     identifing_key_words(W,F).                              % not seeing good structure of sentence ) 
                             
-                                           
+
+text_to_list_comm(T,W) :- atom_string(T, S),           % Text_to_list('enter like this', B). B = [enter, like, this]
+                string_chars(S, C),    
+               chars_words(C, W).           % Basically destroys a String into alpha elements (simple chars)
+               %oracion(W,R),                 % W is the text converted to list.
+               %length_1(X,R), L is X, X > 0, %this checks if R is not empty (which, if it is, oracion is 
+                                                         
                          
 
 chars_words([], []).

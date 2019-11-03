@@ -4,6 +4,7 @@
 % THE CURRENT .pl FILE.
 :- include('NaturalLangParser.pl').
 
+
 logic(farid,engeneer).
 logic(carlos,doctor).
 
@@ -23,3 +24,6 @@ tower_control:-
         tower_control.                %LOOPS THROGH FOR NEVER ENDING CONVERSATION.
 
 
+
+                  
+                
