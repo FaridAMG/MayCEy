@@ -87,6 +87,9 @@ verificar_compatibilidad_de_involucrados(X,E,S):-   %Pregunta
                                             member(A,E), tower_control_comm('Cual es el modelo de su aeronave...',R),
                                             member(M,R) -> asignacion_de_pista(X,T,S));
 
+                                            (aeronave(M,T,A), tower_control_comm('Cual es el modelo y matricula de su aeronave...',R)
+                                             ->  verificar_compatibilidad_de_involucrados(X,R,S) );
+
                                             S = 'Credenciales incorrectos...'
                                         
                                         ).
