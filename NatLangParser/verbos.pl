@@ -14,5 +14,5 @@ hacer('despegar').
 
 
 verificar_compatibilidad_de_preg(E,S):-
-                (hacer(X), member(X,E)) -> verificar_compatibilidad_de_involucrados(X,E,S); S = E.
+                (hacer(X), member(X,E)) -> verificar_compatibilidad_de_involucrados(X,E,S); S = S.
                                
