@@ -133,17 +133,17 @@ determinante([7500|S],S).
 
 
 %inicio_conv 
-inicio(buenas).
+inicio(buenas). % TOKENS DE INICIO DE CONVERSACION
 inicio(buenos).
 inicio(hola).
 
 
 %fin_conv 
-fin(gracias).
+fin(gracias). % TOKENS DE FIN DE CONVERSACION
 fin(adios).
 
 %pregunta_conv 
-pregunta(que).
+pregunta(que).  % TOKENS DE PREGUNTA HECHA POR EL USUARIO
 pregunta(cuanto).
 pregunta(cuantos).
 pregunta(cual).
@@ -154,7 +154,7 @@ pregunta(permiso).
 pregunta(necesito).
 
 %emergencia_conv 
-emergencia(mayday).
+emergencia(mayday). % TOKENS DE EMERGENCIA 
 emergencia('7500').
 
 
@@ -171,22 +171,22 @@ conv_starters(E,S) :-   % E es la entrada y S es la salida....
 
 
 %FIN DE CONVERSACION
-conv_enders(E,S) :- 
+conv_enders(E,S) :- % E es la entrada y S es la salida....
             fin(X),
             member(X,E) -> S = 'Cambio y fuera!'. 
 
 
 %PREGUNTAS
-conv_questions(E,S) :- 
+conv_questions(E,S) :-     % E es la entrada y S es la salida....
             pregunta(X),
-            member(X,E) -> verificar_compatibilidad_de_preg(E,S).
+            member(X,E) -> verificar_compatibilidad_de_preg(E,S). % Regla esta en verbos.pl
 
 
 
 %EMERGENCIAS
-conv_emergencys(E,S) :- 
+conv_emergencys(E,S) :-  % E es la entrada y S es la salida....
             emergencia(X),
-            member(X,E) -> verificar_compatibilidad_de_eme(X,E,S).
+            member(X,E) -> verificar_compatibilidad_de_eme(X,E,S). % Regla esta en verbos.pl
 
 
 

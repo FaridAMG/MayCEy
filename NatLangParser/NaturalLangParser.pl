@@ -71,8 +71,8 @@ chars_words_aux([], []).
                 atom_chars(Atom, Word).
                 
             
-            not_alpha(X) :- \+ char_type(X, alnum).  %datatype
-            alpha(X) :- char_type(X, alnum). %datatype
+            not_alpha(X) :- \+ char_type(X, alnum).  %datatype ALNUM = alphanumeric
+            alpha(X) :- char_type(X, alnum). %datatype   ALNUM = alphanumeric
 
 
 % Finally, a naive definition for partition_sorted/4 : This definition is naive because 
@@ -100,7 +100,7 @@ length_1(L+1, [H|T]) :- length_1(L,T).
 
 %__________________________________________________________________
 %-------------------------------------------------------------------
-%MECANISMOS DE RAZONAMINETO (mecanismo hacia atras)................
+%MECANISMOS DE RAZONAMINETO (mecanismo hacia adelate)................
 %-------------------------------------------------------------------
 %___________________________________________________________________
 
@@ -116,12 +116,12 @@ length_1(L+1, [H|T]) :- length_1(L,T).
 
 
 % IDENTIFING KEYS WORDS.....
-identifing_key_words(E,S):-
-                conv_emergencys(E,S);
-                conv_questions(E,S);
-                conv_starters(E,S);
+identifing_key_words(E,S):-               %IDENTIFICACION DE TOKENS SE DA AQUI
+                conv_emergencys(E,S);     %FUNCIONA POR MEDIO DE PRIORIDAD
+                conv_questions(E,S);      % VA EN ORDEN: emergencia, pregunta, inicio de conversacion
+                conv_starters(E,S);      % y termino de conversacion
                 conv_enders(E,S);
-                S = 'Perdon, no entendi. Repita...'.
+                S = 'Perdon, no entendi. Repita...'.  % SI NO ENCUENTRA NINGUN TOKEN MUESTRA ESTE MENSAJE DE ERROR
 
 
 

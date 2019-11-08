@@ -11,8 +11,9 @@ logic(carlos,doctor).
 
 calling_tower_control:- % !!! INICIO DEL PROGRAMA !!!
         write("BIENVENIDOS A MayCEy, POR FAVOR LEA LAS SIGUIENTES INSTRUCCIONES :"),
-        nl,write("1) TODAS LAS LINEAS DEBEN TERMINAR CON PUNTO (.)"),
-        nl,nl,nl,tower_control.
+        nl,write("1) TODAS LAS LINEAS DEBEN TERMINAR CON PUNTO (.)"), 
+        nl,write("2) TEXTO DEBE ESTAR CONTENIDO ENTRE COMILLAS SIMPLES"),
+        nl,nl,nl,tower_control. % MUESTRA LAS REGLAS DEOL PROGRAMA
 
 
 tower_control:-   
