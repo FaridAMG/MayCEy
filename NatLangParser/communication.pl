@@ -40,8 +40,8 @@ partition_sorted(alpha, List, Word, Rest),
 atom_chars(Atom, Word).
 
 
-not_alpha(X) :- \+ char_type(X, alpha).
-alpha(X) :- char_type(X, alpha).
+not_alpha(X) :- \+ char_type(X, alnum). %datatype
+alpha(X) :- char_type(X, alnum).   %datatype
 
 
 % Finally, a naive definition for partition_sorted/4 : This definition is naive because 
