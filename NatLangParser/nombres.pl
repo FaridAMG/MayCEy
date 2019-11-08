@@ -51,12 +51,12 @@ aeronave(cessna,peq,delta).
 
 aeronave(beechcraft,peq,charlie).
 aeronave(phenom,peq,india).
-aeronave(717,med,lima).
-aeronave(190,med,romeo).
-aeronave(medium,med,tango).%a220
-aeronave(747,gran,yankee).
-aeronave(a340,gran,echo).
-aeronave(a380,gran,oscar).
+aeronave('717',med,lima).
+aeronave('190',med,romeo).
+aeronave('a220',med,tango).%a220
+aeronave('747',gran,yankee).
+aeronave('a340',gran,echo).
+aeronave('a380',gran,oscar).
 
 %NOMBRE DE PISTAS(nombre, km, direccion, velocidad max p'aterrizar)
 pista(p1,peq,'',200).
