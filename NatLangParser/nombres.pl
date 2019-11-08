@@ -60,8 +60,8 @@ aeronave('a380',gran,oscar).
 
 %NOMBRE DE PISTAS(nombre, km, direccion, velocidad max p'aterrizar)
 pista(p1,peq,'',200).
-pista('p2-1',med,'este a oeste',300).
-pista('p2-2',med,'oeste a este',300).
+pista('p2-1',med,'oeste',300).
+pista('p2-2',med,'este',300).
 pista(p3,gran,'',400).
 
 %NOMBRE DE LAS EMERGENCIAS
@@ -114,7 +114,7 @@ asignacion_de_pista(X,T,R):-
                     atom_concat(P,' a velocidad max de ',Y),
                     atom_concat(Y,D,V),
                     atom_concat(V,' Km/h ',K),
-                    atom_concat(K,' con orientacion ',W),
+                    atom_concat(K,' con orientacion al ',W),
                     atom_concat(W,C,R)
                     
                     );
@@ -129,13 +129,15 @@ asignacion_de_pista(X,T,R):-
 
                     (X == 'despegar', pista(A,T,C,D) -> 
                     
+                  tower_control_comm('A que sentido desea despegar, hacia el Este, o el Oeste...',F),
+                    member(C,F),
                     atom_concat('Permiso para despegar desde la pista ',A, P),
-                    atom_concat(P,' con orientacion ',W),
+                    atom_concat(P,' con orientacion al ',W),
                     atom_concat(W,C,R)
                     
                     );
 
-                    R = 'Perdon, no entiendo'.
+                    R = 'Perdon, no tenemos pistas disponibles con sus especificaciones, permiso denegado'.
 
 
 
