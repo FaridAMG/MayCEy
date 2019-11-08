@@ -151,6 +151,7 @@ pregunta(cuales).
 pregunta(porque).
 pregunta(puedo).
 pregunta(permiso).
+pregunta(necesito).
 
 %emergencia_conv 
 emergencia(mayday).
@@ -185,7 +186,7 @@ conv_questions(E,S) :-
 %EMERGENCIAS
 conv_emergencys(E,S) :- 
             emergencia(X),
-            member(X,E) -> S = 'this is an emergency'.
+            member(X,E) -> verificar_compatibilidad_de_eme(X,E,S).
 
 
 

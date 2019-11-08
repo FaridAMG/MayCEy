@@ -65,10 +65,10 @@ pista('p2-2',med,'oeste a este',300).
 pista(p3,gran,'',400).
 
 %NOMBRE DE LAS EMERGENCIAS
-emergen(perdida,motor,tren).
-emergen(parto,'','').
-emergen(paro,cardiaco,respiratorio).
-emergen(secuestro,'','').
+emergen(perdida,'aterrizar'). % emergen(TOKEN,PROTOCOLO)
+emergen(parto,'aterrizar').
+emergen(paro,'aterrizar').
+emergen(secuestro,'').
 
 
 
@@ -96,6 +96,8 @@ verificar_compatibilidad_de_involucrados(X,E,S):-   %Pregunta
 
                                             
 asignacion_de_pista(X,T,R):-
+
+                     
                 
                     (X == 'aterrizar', pista(A,T,C,D), C == '' -> 
                     
@@ -134,6 +136,32 @@ asignacion_de_pista(X,T,R):-
                     );
 
                     R = 'Perdon, no entiendo'.
+
+
+
+verificar_compatibilidad_de_emergencia(X,E,S):-
+
+                    
+                    (X == 'mayday', emergen(M,P),
+                    member(M,E), P == 'aterrizar' ->verificar_compatibilidad_de_involucrados(P,E,R),
+                    atom_concat('EMERGENCIA:', R, T), atom_concat(T,' Los rescatistas van en camino! ',S)
+                    
+                       );
+
+                       (
+                          X =='mayday', tower_control_comm('Atencion de emergencias aeronauticas: cual es su emergencia!',R),
+                          emergen(M,P),
+                          member(M,R), P == 'aterrizar' ->verificar_compatibilidad_de_involucrados(P,E,F),
+                          atom_concat('EMERGENCIA:', F, T), atom_concat(T,' Los rescatistas van en camino! ',S)
+
+                          );
+
+                          S = 'La situacion no se ha determinado como una Emergencia, siga protocolos estandar...'.
+
+            
+
+
+
 
 
 
