@@ -68,7 +68,7 @@ pista(p3,gran,'',400).
 emergen(perdida,'aterrizar'). % emergen(TOKEN,PROTOCOLO)
 emergen(parto,'aterrizar').
 emergen(paro,'aterrizar').
-emergen(secuestro,'').
+emergen(secuestro,'disimulo').
 
 
 
@@ -141,10 +141,14 @@ asignacion_de_pista(X,T,R):-
 
 verificar_compatibilidad_de_emergencia(X,E,S):-
 
-                    
                     (X == 'mayday', emergen(M,P),
                     member(M,E), P == 'aterrizar' ->verificar_compatibilidad_de_involucrados(P,E,R),
                     atom_concat('EMERGENCIA:', R, T), atom_concat(T,' Los rescatistas van en camino! ',S)
+                    
+                       );
+
+                       (X == 'mayday',emergen(M,P),  P == 'disimulo',
+                    member(M,E), ! -> S = 'Por motivo de mal tiempo en la pista del aeropuerto los vamos a desviar en direccion N.O, a un aeropuerto privado. Disculpe los inconvenientes.'
                     
                        );
 
@@ -155,6 +159,13 @@ verificar_compatibilidad_de_emergencia(X,E,S):-
                           atom_concat('EMERGENCIA:', F, T), atom_concat(T,' Los rescatistas van en camino! ',S)
 
                           );
+
+                          (
+                              X =='mayday', tower_control_comm('Atencion de emergencias aeronauticas: cual es su emergencia!',R),
+                              emergen(M,P), P == 'disimulo',
+                              member(M,R), ! -> S = 'Por motivo de mal tiempo en la pista del aeropuerto los vamos a desviar en direccion N.O, a un aeropuerto privado. Disculpe los inconvenientes.'
+    
+                              );
 
                           S = 'La situacion no se ha determinado como una Emergencia, siga protocolos estandar...'.
 
