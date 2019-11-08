@@ -72,6 +72,13 @@ emergen(secuestro,'disimulo').
 emergen('7500','disimulo').
 
 
+%ATENCION DE EMERGENCIAS
+atencion(1, 'medico').
+atencion(2, 'bomberos').
+atencion(3, 'OIJ').
+atencion(4, 'Fuerza publica').
+
+
 
 
 verificar_compatibilidad_de_involucrados(X,E,S):-   %Pregunta
