@@ -155,7 +155,7 @@ pregunta(necesito).
 
 %emergencia_conv 
 emergencia(mayday).
-emergencia(7500).
+emergencia('7500').
 
 
 

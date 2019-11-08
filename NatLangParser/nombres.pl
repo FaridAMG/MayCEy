@@ -69,7 +69,7 @@ emergen(perdida,'aterrizar'). % emergen(TOKEN,PROTOCOLO)
 emergen(parto,'aterrizar').
 emergen(paro,'aterrizar').
 emergen(secuestro,'disimulo').
-
+emergen('7500','disimulo').
 
 
 
@@ -149,7 +149,7 @@ verificar_compatibilidad_de_emergencia(X,E,S):-
                     
                        );
 
-                       (X == 'mayday',emergen(M,P),  P == 'disimulo',
+                       ((X == 'mayday'; X == '7500'),emergen(M,P),  P == 'disimulo',
                     member(M,E), ! -> S = 'Por motivo de mal tiempo en la pista del aeropuerto los vamos a desviar en direccion N.O, a un aeropuerto privado. Disculpe los inconvenientes.'
                     
                        );
@@ -163,7 +163,7 @@ verificar_compatibilidad_de_emergencia(X,E,S):-
                           );
 
                           (
-                              X =='mayday', tower_control_comm('Atencion de emergencias aeronauticas: cual es su emergencia!',R),
+                              (X == 'mayday'; X == '7500'), tower_control_comm('Atencion de emergencias aeronauticas: cual es su emergencia!',R),
                               emergen(M,P), P == 'disimulo',
                               member(M,R), ! -> S = 'Por motivo de mal tiempo en la pista del aeropuerto los vamos a desviar en direccion N.O, a un aeropuerto privado. Disculpe los inconvenientes.'
     
