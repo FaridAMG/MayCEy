@@ -83,6 +83,10 @@ determinante([noveno|S],S).
 determinante([decimo|S],S).
 
 
+
+
+
+
 %LOS INDEFINIDOS
 determinante([algun|S],S).
 determinante([alguno|S],S).
@@ -110,6 +114,11 @@ determinante([todos|S],S).
 determinante([todas|S],S).
 determinante([demasiados|S],S).
 determinante([demasiadas|S],S).
+
+
+
+
+
 %LOS INTERROGATIVOS/EXCLAMATIVOS
 determinante([que|S],S).
 determinante([cuanto|S],S).
@@ -119,13 +128,24 @@ determinante([cuales|S],S).
 determinante([porque|S],S).
 determinante([puedo|S],S).
 determinante([permiso|S],S).
+
+
+
+
+
 %LOS DE FIN DE CONVERSACION
 determinante([gracias|S],S).
 determinante([adios|S],S).
+
+
+
 %LOS DE INICIO DE CONVERSACION
 determinante([buenas|S],S).
 determinante([buenos|S],S).
 determinante([hola|S],S).
+
+
+
 %LOS DE EMERGENCIAS
 determinante([mayday|S],S).
 determinante([7500|S],S).
@@ -152,6 +172,8 @@ pregunta(porque).
 pregunta(puedo).
 pregunta(permiso).
 pregunta(necesito).
+determinante([quiero|S],S).
+determinante([deseo|S],S).
 
 %emergencia_conv 
 emergencia(mayday). % TOKENS DE EMERGENCIA 
@@ -173,7 +195,7 @@ conv_starters(E,S) :-   % E es la entrada y S es la salida....
 %FIN DE CONVERSACION
 conv_enders(E,S) :- % E es la entrada y S es la salida....
             fin(X),
-            member(X,E) -> S = 'Cambio y fuera!'. 
+            member(X,E) -> S = 'Pura vida! Tenga un buen día'. 
 
 
 %PREGUNTAS

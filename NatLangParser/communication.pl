@@ -1,7 +1,7 @@
 
 
-tower_control_comm(C,O):-   
-    write("<MayCEy>|: "),write(C),   %COMPUTER WRITES THE OUTPUT.
+the_trainer_comm(C,O):-   
+    write("<MrTrainer>|: "),write(C),   %COMPUTER WRITES THE OUTPUT.
    nl,write("<User>  "),read(U),   %WAIT FOR MY INPUT.
     string_lower(U, L),              %LOWER CASE THE INITIAL INPUT (PROGRAM WORKS IN LOWER CASE).
      atom_string(A, L),                %STRING_LOWER() WILL GIVE A STRING, SO ATOM_STRING() CONVERTS TO "ATOM" DATA.
