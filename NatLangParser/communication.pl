@@ -1,19 +1,19 @@
 
 
 the_trainer_comm(C,O):-   
-    write("<MrTrainer>|: "),write(C),   %COMPUTER WRITES THE OUTPUT.
-   nl,write("<User>  "),read(U),   %WAIT FOR MY INPUT.
-    string_lower(U, L),              %LOWER CASE THE INITIAL INPUT (PROGRAM WORKS IN LOWER CASE).
-     atom_string(A, L),                %STRING_LOWER() WILL GIVE A STRING, SO ATOM_STRING() CONVERTS TO "ATOM" DATA.
-    text_to_list_comm(A,O).               %LOGIC (!!!! PROGRAM STARTS HERE !!!!) 
+    write("<MrTrainer>|: "),write(C),   %COMPUTADORA ESCRIBE LA SALIDA
+   nl,write("<User>  "),read(U),   %ESPERA POR LA ENTRADA DEL USUARIO
+    string_lower(U, L),              %VUELVE LA ENTRADA EN MINUSCULA
+     atom_string(A, L),                %STRING_LOWER() DA UN STRING, PARA QUE ATOM_STRING() LO CONVIERTE EN DATO PARTICULA.
+    text_to_list_comm(A,O).               %LOGICA (!!!! PROGRAMA EMPIEZA AQUI !!!!) 
 
 
 
-text_to_list_comm(T,W) :- atom_string(T, S),           % Text_to_list('enter like this', B). B = [enter, like, this]
+text_to_list_comm(T,W) :- atom_string(T, S),           % Text_to_list('enter ASI', B). B = [entra, asi]
 string_chars(S, C),    
-chars_words(C, W).           % Basically destroys a String into alpha elements (simple chars)
-%oracion(W,R),                 % W is the text converted to list.
-%length_1(X,R), L is X, X > 0, %this checks if R is not empty (which, if it is, oracion is 
+chars_words(C, W).           % destruye un aentrada en sus particulas iniciales
+%oracion(W,R),                 % W es el texto convertido en la lista
+%length_1(X,R), L is X, X > 0, %checa si R no esta vacio 
                                          
          
 
@@ -29,9 +29,8 @@ word_rest([C|Cs], W, Rest0),
 strip_non_alpha(Rest0, Rest),
 chars_words_aux(Rest, Ws).
 
-%I have used a predicate called partition_sorted/4 to define both word_rest/3 and strip_non_alpha/2.
-% It takes a list and splits it in two: a front for which a predicate succeeds, 
-%and a rest (the first element of the rest is the first element in the original list for which the predicate fails).
+% toma un alista y la divide en dos: un frente para cuando un predicado  predicate triunfa, 
+%y un resto 
 strip_non_alpha(List, Rest) :-
 partition_sorted(not_alpha, List, _, Rest).
 
@@ -44,9 +43,7 @@ not_alpha(X) :- \+ char_type(X, alnum). %datatype
 alpha(X) :- char_type(X, alnum).   %datatype
 
 
-% Finally, a naive definition for partition_sorted/4 : This definition is naive because 
-%it only works properly if Goal succeeds or fails once without leaving behind choice points,
-% and the input list is ground.
+
 
 partition_sorted(Goal, List, True, False) :-
 partition_sorted_aux(List, Goal, True, False).

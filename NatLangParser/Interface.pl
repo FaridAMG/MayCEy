@@ -17,12 +17,12 @@ calling_the_trainer:- % !!! INICIO DEL PROGRAMA !!!
 
 
 the_trainer:-   
-        nl,write("<User>  "),read(Input),   %WAIT FOR MY INPUT.
-        string_lower(Input, L),              %LOWER CASE THE INITIAL INPUT (PROGRAM WORKS IN LOWER CASE).
-        atom_string(Atom, L),                %STRING_LOWER() WILL GIVE A STRING, SO ATOM_STRING() CONVERTS TO "ATOM" DATA.
-        text_to_list(Atom,Output),               %LOGIC (!!!! PROGRAM STARTS HERE !!!!)
-        write("<MrTrainer>|: "),write(Output),   %COMPUTER WRITES THE OUTPUT.
-        the_trainer.                %LOOPS THROGH FOR NEVER ENDING CONVERSATION.
+        nl,write(""),read(Input),   %Espera por la entrada.
+        string_lower(Input, L),              %Convierte todo en letra minuscula.
+        atom_string(Atom, L),                %STRING_LOWER() le pasa a  ATOM_STRING() una entrada para  convertirla en "ATOM" DATA.
+        text_to_list(Atom,Output),               %LOGICA (!!!! Programa empieza aqui !!!!)
+        write("<MrTrainer>|: "),write(Output),   %Computadora escribe la salida.
+        the_trainer.                %itera para un aconversación sin termino.
 
 
 

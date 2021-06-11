@@ -2,23 +2,22 @@
 % USING GLC (CONTEXT FREE GRAMMAR)
 
 
-% THE VERBES, NAMES AND DETERMINANTES ARE STORED IN
-% DIFFERENT FILES TO MAINTAIN ORDER IN CODE
-% YOU WILL FIND THESE FILES IN THE SAME FOLDER YOU FOUND
-% THE CURRENT .pl FILE.
+% LOS VERBON NOMBRES Y DETERMINANTES SE ALOJAN EN LA BASE DE CONOCIMIENTO
+% PARA MANTENER ORDEN EN EL CODIGO
+
 :- include('determinantes.pl').
 :- include('verbos.pl').
 :- include('nombres.pl').
 
 
 %-------------------------------------------------------------------
-%DECLARATION OF THE ORIGINAL SINTAGMA
+%DECLARACION DEL SINTAGMA ORIGINAL
 %-------------------------------------------------------------------
 oracion(S0,S):- sintagma_nominal(S0,S1),      %oracion([el,hombre,come,la,manzana],[]). --> True
-    sintagma_verbal(S1,S).                    %oración(S,[]). --> Gives me all possible options
-%Nominal version of the sintagma
+    sintagma_verbal(S1,S).                    %oración(S,[]). --> DEME TODAS LAS OPCIONES POSIBLES
+%version nominal del sintagma
 sintagma_nominal(S0,S):- determinante(S0,S1), nombre(S1,S).
-%Verbal version of the sintagma
+%version verbal del sintagma
 sintagma_verbal(S0,S):- verbo(S0,S).
 sintagma_verbal(S0,S):- verbo(S0,S1), sintagma_nominal(S1,S).
 
@@ -30,21 +29,21 @@ sintagma_verbal(S0,S):- verbo(S0,S1), sintagma_nominal(S1,S).
 
 
 %-------------------------------------------------------------------
-%CONVERTS NORMAL INPUT TEXT TO APPROPRIATE LIST FOR oracion(S0,S)...
+%convierte entrada del usuario en una lista oracion(S0,S)...
 %-------------------------------------------------------------------
-text_to_list(T,F) :- atom_string(T, S),           % Text_to_list('enter like this', B). B = [enter, like, this]
+text_to_list(T,F) :- atom_string(T, S),           % Text_to_list('entra de esta manera', B). B = [entra, de, esta, manera]
                      string_chars(S, C),    
-                    chars_words(C, W),            % Basically destroys a String into alpha elements (simple chars)
-                    %oracion(W,R),                 % W is the text converted to list.
-                    %length_1(X,R), L is X, X > 0, %this checks if R is not empty (which, if it is, oracion is 
-                    identifing_key_words(W,F).                              % not seeing good structure of sentence ) 
+                    chars_words(C, W),            % destruye una oración en sus particulas
+                    %oracion(W,R),                 % W es el texto convertido en una lista
+                    %length_1(X,R), L is X, X > 0, %checa si R no esta vacia 
+                    identifing_key_words(W,F).                               
                             
 
-text_to_list_comm(T,W) :- atom_string(T, S),           % Text_to_list('enter like this', B). B = [enter, like, this]
+text_to_list_comm(T,W) :- atom_string(T, S),           % Text_to_list('entra de esta manera', B). B = [entra, de, esta, manera]
                 string_chars(S, C),    
-               chars_words(C, W).           % Basically destroys a String into alpha elements (simple chars)
-               %oracion(W,R),                 % W is the text converted to list.
-               %length_1(X,R), L is X, X > 0, %this checks if R is not empty (which, if it is, oracion is 
+               chars_words(C, W).           % destruye una oración en sus particulas
+               %oracion(W,R),                 % W es el texto convertido en una lista
+               %length_1(X,R), L is X, X > 0, %checa si R no esta vacia 
                                                          
                          
 
@@ -60,9 +59,7 @@ chars_words_aux([], []).
                 strip_non_alpha(Rest0, Rest),
                 chars_words_aux(Rest, Ws).
                 
-%I have used a predicate called partition_sorted/4 to define both word_rest/3 and strip_non_alpha/2.
-% It takes a list and splits it in two: a front for which a predicate succeeds, 
-%and a rest (the first element of the rest is the first element in the original list for which the predicate fails).
+% Toma un alista y la convierte en dos:  
         strip_non_alpha(List, Rest) :-
                 partition_sorted(not_alpha, List, _, Rest).
             
@@ -71,13 +68,11 @@ chars_words_aux([], []).
                 atom_chars(Atom, Word).
                 
             
-            not_alpha(X) :- \+ char_type(X, alnum).  %datatype ALNUM = alphanumeric
-            alpha(X) :- char_type(X, alnum). %datatype   ALNUM = alphanumeric
+            not_alpha(X) :- \+ char_type(X, alnum).  %datatype ALNUM = alphanumerico
+            alpha(X) :- char_type(X, alnum). %datatype   ALNUM = alphanumerico
 
 
-% Finally, a naive definition for partition_sorted/4 : This definition is naive because 
-%it only works properly if Goal succeeds or fails once without leaving behind choice points,
-% and the input list is ground.
+
 
 partition_sorted(Goal, List, True, False) :-
         partition_sorted_aux(List, Goal, True, False).

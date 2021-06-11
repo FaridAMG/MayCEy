@@ -1,15 +1,7 @@
 % VERBES WILL BE STORED HERE
 :- include('nombres.pl').
+:- include('conocimiento.pl').
 
-
-verbo([come|S],S).
-verbo([aterrizar|S],S).
-verbo([despegar|S],S).
-
-
-%HACERES PERMITIDOS
-hacer('hacer ejercicio').  
-hacer('hacer un deporte').
 
 
 
